@@ -24,12 +24,15 @@ public class Producer {
 
 
         while (true){
-            try {
-
+            try
+            {
                 randomNumber = random.nextInt(high + low) + low;
-                System.out.println(randomNumber);
-                producer.send(new ProducerRecord(topic,String.valueOf(randomNumber)));
-                Thread.sleep(5000);
+                String jsonFile = String.format("{'userid':2,'unit':"+randomNumber+"}");
+                //System.out.println(randomNumber);
+                System.out.println(jsonFile);
+                producer.send(new ProducerRecord(topic,String.valueOf(jsonFile)));
+                Thread.sleep(1000);
+
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
